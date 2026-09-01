@@ -1,0 +1,7 @@
+node_modules/
+lib/
+.npm-cache/
+*.tsbuildinfo
+*.tgz
+# 进程内 ESM resolve-cache 兼容 shim（仓库重组前的旧路径；DSH 重启后可删）
+/dsh-anysearch/
