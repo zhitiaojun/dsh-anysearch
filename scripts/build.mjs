@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * @dsh-external/dsh-anysearch — 跨平台构建（host + client），零 bash 依赖。
+ * @zhitiaojun/dsh-anysearch — 跨平台构建（host + client），零 bash 依赖。
  *
  * 用法：
  *   node scripts/build.mjs                # host（tsc）+ client（tsdown）

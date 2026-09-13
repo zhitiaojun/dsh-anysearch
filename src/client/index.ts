@@ -1,5 +1,5 @@
 /**
- * @dsh-external/dsh-anysearch — client 设置面板（settings.section slot）。
+ * @zhitiaojun/dsh-anysearch — client 设置面板（settings.section slot）。
  *
  * ⚠️ 契约（实测于 0.1.1-rc.2，源自官方 ui-settings-general 的注册方式）：
  * slots.register(options, ReactComponent) —— 组件是**第二个位置参数**的 React 函数组件，
@@ -50,13 +50,13 @@ const CSS = `
 .AnySearchSection_hint{margin:0;color:var(--dsw-alias-label-tertiary);font-size:12px;line-height:18px}
 .AnySearchSection_hint a{color:var(--dsw-alias-state-business-primary)}
 `
-const CSS_TAG_ID = '@dsh-external/dsh-anysearch/SettingsSection.module.css'
+const CSS_TAG_ID = '@zhitiaojun/dsh-anysearch/SettingsSection.module.css'
 
 function injectStyles(): void {
   if (typeof document === 'undefined') return
   if (document.querySelector('style[data-plugin-css="' + CSS_TAG_ID + '"]') !== null) return
   const tag = document.createElement('style')
-  tag.dataset.plugin = '@dsh-external/dsh-anysearch'
+  tag.dataset.plugin = '@zhitiaojun/dsh-anysearch'
   tag.dataset.pluginCss = CSS_TAG_ID
   tag.textContent = CSS
   document.head.appendChild(tag)

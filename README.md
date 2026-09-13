@@ -1,4 +1,4 @@
-# @dsh-external/dsh-anysearch
+# @zhitiaojun/dsh-anysearch
 
 AnySearch 实时搜索的 DeepSeek Harness 原生插件 —— 改编自 [anysearch-skill](https://github.com/anysearch-ai/anysearch-skill)（v3.1.0，Apache-2.0）。原 skill 用 Python/Node/PS/Bash 四语言 CLI 子进程包装 `https://api.anysearch.com`；本插件改为 **cordis 原生工具**（免子进程、注入即生效、免重启热重载），并新增 **API key 设置面板**。
 
@@ -32,7 +32,7 @@ DSH → 设置 → **插件市场** → 发现（或搜索 `AnySearch`）→ 安
 pnpm add github:zhitiaojun/dsh-anysearch
 ```
 
-再把包名 `@dsh-external/dsh-anysearch` 加进该 profile `package.json` 的 `dsh.profile.bundles`，重启 DSH。
+再把包名 `@zhitiaojun/dsh-anysearch` 加进该 profile `package.json` 的 `dsh.profile.bundles`，重启 DSH。
 
 > 仓库只提交源码、不提交 `lib/` 构建产物：安装时由 `prepare`（`node scripts/build.mjs`，纯 node、跨平台、无 bash 依赖）自动编译 host 与 client。
 
