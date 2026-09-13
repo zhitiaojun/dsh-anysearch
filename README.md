@@ -52,6 +52,19 @@ pnpm add github:zhitiaojun/dsh-anysearch
 
 > 仓库只提交源码、不提交 `lib/` 构建产物：安装时由 `prepare`（`node scripts/build.mjs`，纯 node、跨平台、无 bash 依赖）自动编译 host 与 client。
 
+⚠️ **pnpm 10+ 默认禁止依赖执行构建脚本**，首次直接 `pnpm add` 会报
+`ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED`（"…needs to execute build scripts but is not in the allowBuilds allowlist"）。两种处理：
+
+- **从插件市场安装**：市场会识别这个错误并弹出 approve-builds 确认，确认后自动写入白名单并重试——无需手工操作。
+- **手工安装**：把 pnpm 错误信息里给出的那行键加进 profile 的 `pnpm-workspace.yaml`，然后重试（键需与 pnpm 提示的完全一致，形如
+  `'@zhitiaojun/dsh-anysearch@https://codeload.github.com/zhitiaojun/dsh-anysearch/tar.gz/<40位commit>': true`），例如：
+
+  ```yaml
+  allowBuilds:
+    '@zhitiaojun/dsh-anysearch@https://codeload.github.com/zhitiaojun/dsh-anysearch/tar.gz/<commit>': true
+  ```
+
+
 ### 本地开发目录（dsh-super-injector 环境）
 
 ```bash
