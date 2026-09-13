@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      # npm ci 会执行 prepare（node scripts/build.mjs），已覆盖 host+client 构建
       - run: npm ci
       - run: npm run typecheck
-      - run: bash scripts/build.sh
-      - run: npm run build:client
+      - run: npm run build

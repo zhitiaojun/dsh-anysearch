@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1 — 2026-09-13
+
+- 新增跨平台构建脚本 `scripts/build.mjs`（纯 node，零 bash 依赖）：host 走 tsc、client 走 tsdown
+- 新增 `prepare` 生命周期脚本：作为 git 依赖（插件市场 / `pnpm add github:...`）安装时自动构建，仓库无需提交 `lib/` 产物
+- `scripts/build.sh` 改为 build.mjs 的薄包装（开发/注入器链路与安装链路共用同一实现）
+- CI 改用 `npm run build`
+
 ## 0.1.0 — 2026-09-01
 
 首个版本。

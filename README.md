@@ -18,7 +18,25 @@ AnySearch 实时搜索的 DeepSeek Harness 原生插件 —— 改编自 [anysea
 - **API key 优先级**：设置面板 > 插件目录 `.env` > 环境变量 `ANYSEARCH_API_KEY` > 匿名（低限额）。
 - 配额耗尽时若 API 返回 `auto_registered` 新 key，工具结果会提示（经用户确认后保存，不自动落盘）。
 
-## 安装（dsh-super-injector 环境）
+## 安装
+
+### 插件市场（推荐给使用者）
+
+DSH → 设置 → **插件市场** → 发现（或搜索 `AnySearch`）→ 安装。装完在设置页的 **AnySearch** 分区里配 API key 即可。
+
+### 作为 git 依赖手动安装
+
+在 profile 目录（`~/.dsh/profiles/<名字>`，网页版默认 `web`）执行：
+
+```bash
+pnpm add github:zhitiaojun/dsh-anysearch
+```
+
+再把包名 `@dsh-external/dsh-anysearch` 加进该 profile `package.json` 的 `dsh.profile.bundles`，重启 DSH。
+
+> 仓库只提交源码、不提交 `lib/` 构建产物：安装时由 `prepare`（`node scripts/build.mjs`，纯 node、跨平台、无 bash 依赖）自动编译 host 与 client。
+
+### 本地开发目录（dsh-super-injector 环境）
 
 ```bash
 dev_build_plugin  D:/Project/anysearch   # tsc host + tsdown client + npm pack
@@ -30,18 +48,19 @@ dev_inject_plugin D:/Project/anysearch   # 运行时注入，即刻生效
 ## 本地开发
 
 ```bash
-npm install              # typescript / tsdown / @types/node
-bash scripts/build.sh    # host（tsc，无需 DSH checkout；ambient 声明 + 运行时 junction）
-npm run build:client     # client（tsdown → lib/client.js）
+npm install          # 装依赖（并触发 prepare：自动完成一次构建）
+npm run build        # host（tsc）+ client（tsdown）→ lib/
+npm run build:host   # 只构建 host
+npm run build:client # 只构建 client（tsdown）
+npm run typecheck    # tsc --noEmit
 ```
 
-环境变量：`ANYSEARCH_API_BASE_URL`（默认 `https://api.anysearch.com`）、`DSH_RUNTIME`（dsh 的 node_modules，junction 探测失败时手动指定）。
+环境变量：`ANYSEARCH_API_BASE_URL`（默认 `https://api.anysearch.com`）、`DSH_RUNTIME`（dsh 的 node_modules，运行时链接探测失败时手动指定）。
 
 设置数据存于 `~/.dsh/dsh-anysearch/config.json`。
 
-> 本机若 bash 不可用（DSH 沙箱下 cygwin 无法建 signal pipe），可按 build.sh 的步骤用原生命令执行：
-> `npm install --cache .npm-cache` → `node node_modules/typescript/bin/tsc -p tsconfig.json` →
-> 建 `node_modules/@deepseek-ai/dsh-tools` junction → `npm run build:client` → `npm pack`。
+> bash 不可用的环境（如 DSH 沙箱下 cygwin 无法建 signal pipe）直接用 `node scripts/build.mjs`：
+> 构建逻辑全在这个 node 脚本里，`scripts/build.sh` 只是它给注入器链路用的薄包装。
 
 ## 踩坑记录（给后续插件作者）
 
