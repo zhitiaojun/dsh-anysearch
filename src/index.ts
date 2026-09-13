@@ -546,8 +546,7 @@ export function apply(ctx: HostCtx, _config: unknown): void {
       }))
       const out: string[] = []
       settled.forEach((r, i) => {
-        const label = r.entry.item?.query ?? `(item ${r.entry.index + 1})`
-        out.push(`## Query ${i + 1}: ${label}`, '')
+        out.push(`## Query ${i + 1}: ${r.entry.label}`, '')
         if (r.error) out.push(`Search failed: ${r.error}`)
         else out.push(r.markdown || 'No relevant results found.')
         if (i < settled.length - 1) out.push('', '---', '')
