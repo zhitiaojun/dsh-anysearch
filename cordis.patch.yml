@@ -1,0 +1,6 @@
+# dsh bundle patch: inserts this plugin into a profile's layer stack.
+# 这条 insert 让本包在 profile 装配时以稳定 id（dsh-anysearch）挂载为 loader entry，
+# 市场/补丁层的启用禁用开关即以该 id 为目标。
+- insert:
+    - id: dsh-anysearch
+      name: '@zhitiaojun/dsh-anysearch'
