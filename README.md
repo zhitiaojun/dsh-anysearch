@@ -2,6 +2,20 @@
 
 AnySearch 实时搜索的 DeepSeek Harness 原生插件 —— 改编自 [anysearch-skill](https://github.com/anysearch-ai/anysearch-skill)（v3.1.0，Apache-2.0）。原 skill 用 Python/Node/PS/Bash 四语言 CLI 子进程包装 `https://api.anysearch.com`；本插件改为 **cordis 原生工具**（免子进程、注入即生效、免重启热重载），并新增 **API key 设置面板**。
 
+> ## ⚠️ 不能与官方的 AnySearch 插件共存
+>
+> 本插件与官方 [`@anysearch/anysearch-dsh`](https://www.npmjs.com/package/@anysearch/anysearch-dsh) **不能同时安装**。
+> 两者都注册 `anysearch_search` 与 `anysearch_batch_search`，工具名完全相同，后加载的一方必然注册失败：
+>
+> ```
+> failed to apply loader entry (@zhitiaojun/dsh-anysearch):
+> tool "anysearch_search" is already registered
+> ```
+>
+> 安装本插件前，请先卸载或停用官方包；反之亦然。两者的定位也不同——官方包走
+> `registerSearchProvider` 把 AnySearch 接到宿主既有的 `web_search`/`web_fetch` 之下，
+> 本插件则是独立的 4 个原生工具（含官方包不具备的域目录发现与 API key 设置面板）。
+
 ## 功能
 
 | 工具 | 说明 |
@@ -19,6 +33,8 @@ AnySearch 实时搜索的 DeepSeek Harness 原生插件 —— 改编自 [anysea
 - 配额耗尽时若 API 返回 `auto_registered` 新 key，工具结果会提示（经用户确认后保存，不自动落盘）。
 
 ## 安装
+
+> 安装前请先确认已卸载 / 停用官方 `@anysearch/anysearch-dsh`——两者工具同名，**不能共存**（见上文警告）。
 
 ### 插件市场（推荐给使用者）
 
